@@ -372,14 +372,11 @@ private: System::Void textBox3_TextChanged(System::Object^ sender, System::Event
 	}
 }
 private: System::Void calculateButton_Click(System::Object^ sender, System::EventArgs^ e) {
-	double BMI = Convert::ToDouble(GetBMI());
-
-
 	bmiRichTextBox->Clear();
 	bmiRichTextBox->AppendText(GetBMI());
 
 	categoryRichTextBox->Clear();
-	categoryRichTextBox->AppendText(GetCategory(BMI));
+	categoryRichTextBox->AppendText(GetCategory(Convert::ToDouble(GetBMI())));
 
 	if (GetCategory(BMI) == "Underweight")
 	{
