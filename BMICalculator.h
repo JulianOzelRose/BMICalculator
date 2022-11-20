@@ -93,20 +93,23 @@ namespace BMICalculator {
 			inchesTextBox->Clear();
 			weightTextBox->Clear();
 
-			bmiRichTextBox->BackColor = System::Drawing::SystemColors::Control;
-			bmiRichTextBox->Clear();
-			bmiRichTextBox->AppendText("INVALID");
+			bmiTextBox->BackColor = System::Drawing::SystemColors::Control;
+			bmiTextBox->Clear();
 
-			categoryRichTextBox->BackColor = System::Drawing::SystemColors::Control;
-			categoryRichTextBox->Clear();
-			categoryRichTextBox->AppendText("INVALID");
+			categoryTextBox->BackColor = System::Drawing::SystemColors::Control;
+			categoryTextBox->Clear();
 		}
 	private:
 		double feet;
 		double inches;
 		double weight;
 		double BMI;
-		Double testVal = 0;
+	private: System::Windows::Forms::TextBox^ categoryTextBox;
+
+	private: System::Windows::Forms::TextBox^ bmiTextBox;
+	private: System::Windows::Forms::Button^ button1;
+
+		   Double testVal = 0;
 
 
 	protected:
@@ -136,8 +139,8 @@ namespace BMICalculator {
 
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label5;
-	private: System::Windows::Forms::RichTextBox^ bmiRichTextBox;
-	private: System::Windows::Forms::RichTextBox^ categoryRichTextBox;
+
+
 
 
 	private: System::Windows::Forms::GroupBox^ groupBox1;
@@ -169,13 +172,14 @@ namespace BMICalculator {
 			this->calculateButton = (gcnew System::Windows::Forms::Button());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->bmiRichTextBox = (gcnew System::Windows::Forms::RichTextBox());
-			this->categoryRichTextBox = (gcnew System::Windows::Forms::RichTextBox());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->weightTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
+			this->categoryTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->bmiTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
 			this->groupBox3->SuspendLayout();
@@ -224,18 +228,18 @@ namespace BMICalculator {
 			// 
 			// calculateButton
 			// 
-			this->calculateButton->Location = System::Drawing::Point(108, 224);
+			this->calculateButton->Location = System::Drawing::Point(68, 224);
 			this->calculateButton->Name = L"calculateButton";
-			this->calculateButton->Size = System::Drawing::Size(151, 54);
+			this->calculateButton->Size = System::Drawing::Size(122, 37);
 			this->calculateButton->TabIndex = 6;
-			this->calculateButton->Text = L"CALCULATE";
+			this->calculateButton->Text = L"Calculate";
 			this->calculateButton->UseVisualStyleBackColor = true;
 			this->calculateButton->Click += gcnew System::EventHandler(this, &BMICalculator::calculateButton_Click);
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(5, 33);
+			this->label4->Location = System::Drawing::Point(13, 36);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(29, 13);
 			this->label4->TabIndex = 9;
@@ -245,32 +249,12 @@ namespace BMICalculator {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(187, 33);
+			this->label5->Location = System::Drawing::Point(184, 35);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(52, 13);
 			this->label5->TabIndex = 10;
 			this->label5->Text = L"Category:";
 			this->label5->Click += gcnew System::EventHandler(this, &BMICalculator::label5_Click);
-			// 
-			// bmiRichTextBox
-			// 
-			this->bmiRichTextBox->Location = System::Drawing::Point(37, 30);
-			this->bmiRichTextBox->Name = L"bmiRichTextBox";
-			this->bmiRichTextBox->ReadOnly = true;
-			this->bmiRichTextBox->Size = System::Drawing::Size(100, 26);
-			this->bmiRichTextBox->TabIndex = 11;
-			this->bmiRichTextBox->Text = L"";
-			// 
-			// categoryRichTextBox
-			// 
-			this->categoryRichTextBox->BackColor = System::Drawing::SystemColors::Control;
-			this->categoryRichTextBox->Location = System::Drawing::Point(242, 30);
-			this->categoryRichTextBox->Name = L"categoryRichTextBox";
-			this->categoryRichTextBox->ReadOnly = true;
-			this->categoryRichTextBox->Size = System::Drawing::Size(100, 26);
-			this->categoryRichTextBox->TabIndex = 12;
-			this->categoryRichTextBox->Text = L"";
-			this->categoryRichTextBox->TextChanged += gcnew System::EventHandler(this, &BMICalculator::categoryRichTextBox_TextChanged);
 			// 
 			// groupBox1
 			// 
@@ -316,9 +300,9 @@ namespace BMICalculator {
 			// 
 			// groupBox3
 			// 
-			this->groupBox3->Controls->Add(this->categoryRichTextBox);
+			this->groupBox3->Controls->Add(this->categoryTextBox);
+			this->groupBox3->Controls->Add(this->bmiTextBox);
 			this->groupBox3->Controls->Add(this->label5);
-			this->groupBox3->Controls->Add(this->bmiRichTextBox);
 			this->groupBox3->Controls->Add(this->label4);
 			this->groupBox3->Location = System::Drawing::Point(12, 145);
 			this->groupBox3->Name = L"groupBox3";
@@ -327,11 +311,48 @@ namespace BMICalculator {
 			this->groupBox3->TabStop = false;
 			this->groupBox3->Text = L"Body Mass Index";
 			// 
+			// categoryTextBox
+			// 
+			this->categoryTextBox->AcceptsTab = true;
+			this->categoryTextBox->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->categoryTextBox->Location = System::Drawing::Point(244, 33);
+			this->categoryTextBox->MaxLength = 2;
+			this->categoryTextBox->Name = L"categoryTextBox";
+			this->categoryTextBox->ReadOnly = true;
+			this->categoryTextBox->Size = System::Drawing::Size(90, 20);
+			this->categoryTextBox->TabIndex = 11;
+			this->categoryTextBox->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			// 
+			// bmiTextBox
+			// 
+			this->bmiTextBox->AcceptsTab = true;
+			this->bmiTextBox->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->bmiTextBox->Location = System::Drawing::Point(69, 34);
+			this->bmiTextBox->MaxLength = 2;
+			this->bmiTextBox->Name = L"bmiTextBox";
+			this->bmiTextBox->ReadOnly = true;
+			this->bmiTextBox->Size = System::Drawing::Size(90, 20);
+			this->bmiTextBox->TabIndex = 2;
+			this->bmiTextBox->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			this->bmiTextBox->TextChanged += gcnew System::EventHandler(this, &BMICalculator::textBox1_TextChanged);
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(197, 224);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(122, 37);
+			this->button1->TabIndex = 16;
+			this->button1->Text = L"Reset";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &BMICalculator::button1_Click);
+			// 
 			// BMICalculator
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(387, 285);
+			this->BackColor = System::Drawing::SystemColors::Highlight;
+			this->ClientSize = System::Drawing::Size(387, 267);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->calculateButton);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
@@ -372,40 +393,40 @@ private: System::Void textBox3_TextChanged(System::Object^ sender, System::Event
 	}
 }
 private: System::Void calculateButton_Click(System::Object^ sender, System::EventArgs^ e) {
-	bmiRichTextBox->Clear();
-	bmiRichTextBox->AppendText(GetBMI());
+	bmiTextBox->Clear();
+	bmiTextBox->AppendText(GetBMI());
 
-	categoryRichTextBox->Clear();
-	categoryRichTextBox->AppendText(GetCategory(Convert::ToDouble(GetBMI())));
+	categoryTextBox->Clear();
+	categoryTextBox->AppendText(GetCategory(Convert::ToDouble(GetBMI())));
 
 	if (GetCategory(BMI) == "Underweight")
 	{
-		categoryRichTextBox->BackColor = System::Drawing::Color::LightBlue;
-		bmiRichTextBox->BackColor = System::Drawing::Color::LightBlue;
+		categoryTextBox->BackColor = System::Drawing::Color::LightBlue;
+		bmiTextBox->BackColor = System::Drawing::Color::LightBlue;
 	}
 	
 	if (GetCategory(BMI) == "Normal")
 	{
-		categoryRichTextBox->BackColor = System::Drawing::Color::Green;
-		bmiRichTextBox->BackColor = System::Drawing::Color::Green;
+		categoryTextBox->BackColor = System::Drawing::Color::Green;
+		bmiTextBox->BackColor = System::Drawing::Color::Green;
 	}
 
 	if (GetCategory(BMI) == "Overweight")
 	{
-		categoryRichTextBox->BackColor = System::Drawing::Color::Yellow;
-		bmiRichTextBox->BackColor = System::Drawing::Color::Yellow;
+		categoryTextBox->BackColor = System::Drawing::Color::Yellow;
+		bmiTextBox->BackColor = System::Drawing::Color::Yellow;
 	}
 
 	if (GetCategory(BMI) == "Obese")
 	{
-		categoryRichTextBox->BackColor = System::Drawing::Color::Orange;
-		bmiRichTextBox->BackColor = System::Drawing::Color::Orange;
+		categoryTextBox->BackColor = System::Drawing::Color::Orange;
+		bmiTextBox->BackColor = System::Drawing::Color::Orange;
 	}
 
 	if (GetCategory(BMI) == "Extremely Obese")
 	{
-		categoryRichTextBox->BackColor = System::Drawing::Color::Red;
-		bmiRichTextBox->BackColor = System::Drawing::Color::Red;
+		categoryTextBox->BackColor = System::Drawing::Color::Red;
+		bmiTextBox->BackColor = System::Drawing::Color::Red;
 	}
 }
 private: System::Void categoryRichTextBox_TextChanged(System::Object^ sender, System::EventArgs^ e) {
@@ -414,6 +435,8 @@ private: System::Void feetTextBox_TextChanged(System::Object^ sender, System::Ev
 	if (!Double::TryParse((feetTextBox->Text), testVal))
 	{
 		ResetValues();
+		bmiTextBox->AppendText("Invalid");
+		categoryTextBox->AppendText("Invalid");
 	}
 	else
 	{
@@ -424,11 +447,18 @@ private: System::Void inchesTextBox_TextChanged(System::Object^ sender, System::
 	if (!Double::TryParse((inchesTextBox->Text), testVal))
 	{
 		ResetValues();
+		bmiTextBox->AppendText("Invalid");
+		categoryTextBox->AppendText("Invalid");
 	}
 	else
 	{
 		SetInches(System::Convert::ToDouble(inchesTextBox->Text));
 	}
+}
+private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	ResetValues();
 }
 };
 }
